@@ -6,7 +6,9 @@ import express from 'express';
     import { handleHealth } from './routes/health.js';
     import { handleGetArticles, handlePostArticles } from './routes/articles.js';
     import { handleGetRssFeeds, handlePostRssFeeds, handleDeleteRssFeed } from './routes/rss-feeds.js';
-    import { handleGetServices, handlePostServices } from './routes/services.js';
+    import { handleGetServices, handlePostServices, handlePutServices, handleDeleteService } from './routes/services.js';
+    import { handleGetSpecialOffers, handlePostSpecialOffers, handlePutSpecialOffers, handleDeleteSpecialOffer } from './routes/special-offers.js';
+    import { handleGetFeatureToggles, handlePutFeatureToggles } from './routes/feature-toggles.js';
 
     const app = express();
     const port = process.env.PORT || 3001;
@@ -62,6 +64,18 @@ import express from 'express';
     // Services Management
     app.get('/services', handleGetServices);
     app.post('/services', handlePostServices);
+    app.put('/services/:id', handlePutServices);
+    app.delete('/services/:id', handleDeleteService);
+
+    // Special Offers Management
+    app.get('/special-offers', handleGetSpecialOffers);
+    app.post('/special-offers', handlePostSpecialOffers);
+    app.put('/special-offers/:id', handlePutSpecialOffers);
+    app.delete('/special-offers/:id', handleDeleteSpecialOffer);
+
+    // Feature Toggles Management
+    app.get('/feature-toggles', handleGetFeatureToggles);
+    app.put('/feature-toggles/:id', handlePutFeatureToggles);
 
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
